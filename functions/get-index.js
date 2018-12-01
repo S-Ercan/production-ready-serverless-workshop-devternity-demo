@@ -26,6 +26,7 @@ const getRestaurants = async () => {
 }
 
 module.exports.handler = wrap(async (event, context) => {
+  Log.debug('get-index')
   const template = loadHtml()
   const restaurants = await getRestaurants()
   const dayOfWeek = days[new Date().getDay()]
