@@ -13,35 +13,6 @@
       "tags": {
         "TEAM": "test"
       },
-      "iamRoleStatements": [
-        {
-          "Effect": "Allow",
-          "Action": "dynamodb:scan",
-          "Resource": {
-            "Fn::GetAtt": [
-              "restaurantsTable",
-              "Arn"
-            ]
-          }
-        },
-        {
-          "Effect": "Allow",
-          "Action": "kinesis:PutRecord",
-          "Resource": {
-            "Fn::GetAtt": [
-              "orderEventsStream",
-              "Arn"
-            ]
-          }
-        },
-        {
-          "Effect": "Allow",
-          "Action": "sns:Publish",
-          "Resource": {
-            "Ref": "restaurantNotificationTopic"
-          }
-        }
-      ],
       "versionFunctions": true,
       "remoteFunctionData": null,
       "compiledCloudFormationTemplate": {
@@ -162,15 +133,6 @@
                         ]
                       },
                       {
-                        "$ref": "$[\"service\"][\"provider\"][\"iamRoleStatements\"][0]"
-                      },
-                      {
-                        "$ref": "$[\"service\"][\"provider\"][\"iamRoleStatements\"][1]"
-                      },
-                      {
-                        "$ref": "$[\"service\"][\"provider\"][\"iamRoleStatements\"][2]"
-                      },
-                      {
                         "Effect": "Allow",
                         "Action": [
                           "kinesis:GetRecords",
@@ -214,7 +176,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/workshop-selman/dev/1543668274760-2018-12-01T12:44:34.760Z/workshop-selman.zip"
+                "S3Key": "serverless/workshop-selman/dev/1543669396970-2018-12-01T13:03:16.970Z/workshop-selman.zip"
               },
               "FunctionName": "workshop-selman-dev-get-index",
               "Handler": "functions/get-index.handler",
@@ -271,14 +233,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "GetDashindexLambdaVersionhKAslBbmlM5zTiZYmwLg0ElbUfggGQtx9wkpTsOZxE": {
+          "GetDashindexLambdaVersionwkI9ybkNRRLgfLLOVoxftajurWFR2EfI8MY9TP2o": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetDashindexLambdaFunction"
               },
-              "CodeSha256": "sgV1W5SLXtRztghi3wuTbzgMbg2J9+2lQDOs15z+pno="
+              "CodeSha256": "p6oYmHGddUoMlH/pMo6UxrSnUV4pg/hnWibNeVvq6e0="
             }
           },
           "GetDashrestaurantsLambdaFunction": {
@@ -288,14 +250,14 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/workshop-selman/dev/1543668274760-2018-12-01T12:44:34.760Z/workshop-selman.zip"
+                "S3Key": "serverless/workshop-selman/dev/1543669396970-2018-12-01T13:03:16.970Z/workshop-selman.zip"
               },
               "FunctionName": "workshop-selman-dev-get-restaurants",
               "Handler": "functions/get-restaurants.handler",
               "MemorySize": 1024,
               "Role": {
                 "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
+                  "GetDashrestaurantsIamRoleLambdaExecution",
                   "Arn"
                 ]
               },
@@ -316,18 +278,18 @@
               }
             },
             "DependsOn": [
-              "GetDashrestaurantsLogGroup",
-              "IamRoleLambdaExecution"
+              "GetDashrestaurantsIamRoleLambdaExecution",
+              "GetDashrestaurantsLogGroup"
             ]
           },
-          "GetDashrestaurantsLambdaVersiontsp0TaqTiX2EYKmtZk6EmOLYwRcJckMNsK2VPG5J0Y": {
+          "GetDashrestaurantsLambdaVersionzVbaWLrNnoh3saQIrinwrDtukoAZ5dbRsAAjVQhYs": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetDashrestaurantsLambdaFunction"
               },
-              "CodeSha256": "sgV1W5SLXtRztghi3wuTbzgMbg2J9+2lQDOs15z+pno="
+              "CodeSha256": "p6oYmHGddUoMlH/pMo6UxrSnUV4pg/hnWibNeVvq6e0="
             }
           },
           "SearchDashrestaurantsLambdaFunction": {
@@ -337,14 +299,14 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/workshop-selman/dev/1543668274760-2018-12-01T12:44:34.760Z/workshop-selman.zip"
+                "S3Key": "serverless/workshop-selman/dev/1543669396970-2018-12-01T13:03:16.970Z/workshop-selman.zip"
               },
               "FunctionName": "workshop-selman-dev-search-restaurants",
               "Handler": "functions/search-restaurants.handler",
               "MemorySize": 1024,
               "Role": {
                 "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
+                  "SearchDashrestaurantsIamRoleLambdaExecution",
                   "Arn"
                 ]
               },
@@ -365,18 +327,18 @@
               }
             },
             "DependsOn": [
-              "SearchDashrestaurantsLogGroup",
-              "IamRoleLambdaExecution"
+              "SearchDashrestaurantsIamRoleLambdaExecution",
+              "SearchDashrestaurantsLogGroup"
             ]
           },
-          "SearchDashrestaurantsLambdaVersionfzNGJtvFOUq2hP54n4c3Dqprof0wUhGB3FLuFw4n07M": {
+          "SearchDashrestaurantsLambdaVersionEfkKpgr9GzRluLjCpcAHnug051XiDITzl14M04ARpqo": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "SearchDashrestaurantsLambdaFunction"
               },
-              "CodeSha256": "sgV1W5SLXtRztghi3wuTbzgMbg2J9+2lQDOs15z+pno="
+              "CodeSha256": "p6oYmHGddUoMlH/pMo6UxrSnUV4pg/hnWibNeVvq6e0="
             }
           },
           "PlaceDashorderLambdaFunction": {
@@ -386,14 +348,14 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/workshop-selman/dev/1543668274760-2018-12-01T12:44:34.760Z/workshop-selman.zip"
+                "S3Key": "serverless/workshop-selman/dev/1543669396970-2018-12-01T13:03:16.970Z/workshop-selman.zip"
               },
               "FunctionName": "workshop-selman-dev-place-order",
               "Handler": "functions/place-order.handler",
               "MemorySize": 1024,
               "Role": {
                 "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
+                  "PlaceDashorderIamRoleLambdaExecution",
                   "Arn"
                 ]
               },
@@ -414,18 +376,18 @@
               }
             },
             "DependsOn": [
-              "PlaceDashorderLogGroup",
-              "IamRoleLambdaExecution"
+              "PlaceDashorderIamRoleLambdaExecution",
+              "PlaceDashorderLogGroup"
             ]
           },
-          "PlaceDashorderLambdaVersionrBetKrZE8vb7OstFMnN8whIrkkySsSR2C2DNvixmi0": {
+          "PlaceDashorderLambdaVersionuyH9aEoGC1fb5aQI8RHRvwqLdDTtoxS76yy3Yyd6EhM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "PlaceDashorderLambdaFunction"
               },
-              "CodeSha256": "sgV1W5SLXtRztghi3wuTbzgMbg2J9+2lQDOs15z+pno="
+              "CodeSha256": "p6oYmHGddUoMlH/pMo6UxrSnUV4pg/hnWibNeVvq6e0="
             }
           },
           "NotifyDashrestaurantLambdaFunction": {
@@ -435,14 +397,14 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/workshop-selman/dev/1543668274760-2018-12-01T12:44:34.760Z/workshop-selman.zip"
+                "S3Key": "serverless/workshop-selman/dev/1543669396970-2018-12-01T13:03:16.970Z/workshop-selman.zip"
               },
               "FunctionName": "workshop-selman-dev-notify-restaurant",
               "Handler": "functions/notify-restaurant.handler",
               "MemorySize": 1024,
               "Role": {
                 "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
+                  "NotifyDashrestaurantIamRoleLambdaExecution",
                   "Arn"
                 ]
               },
@@ -466,18 +428,18 @@
               }
             },
             "DependsOn": [
-              "NotifyDashrestaurantLogGroup",
-              "IamRoleLambdaExecution"
+              "NotifyDashrestaurantIamRoleLambdaExecution",
+              "NotifyDashrestaurantLogGroup"
             ]
           },
-          "NotifyDashrestaurantLambdaVersionJslwRxR0VrBbxeJeWFZqdEeJKjwyCv2M7HPcMoLv0": {
+          "NotifyDashrestaurantLambdaVersionbKMqHNJI1b1IHTsnFRa8k9dgC2Lr7kXfFnDflF5juU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "NotifyDashrestaurantLambdaFunction"
               },
-              "CodeSha256": "sgV1W5SLXtRztghi3wuTbzgMbg2J9+2lQDOs15z+pno="
+              "CodeSha256": "p6oYmHGddUoMlH/pMo6UxrSnUV4pg/hnWibNeVvq6e0="
             }
           },
           "ApiGatewayRestApi": {
@@ -708,7 +670,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1543668275023": {
+          "ApiGatewayDeployment1543669397230": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -913,7 +875,7 @@
           },
           "NotifyDashrestaurantEventSourceMappingKinesisOrderEventsStream": {
             "Type": "AWS::Lambda::EventSourceMapping",
-            "DependsOn": "IamRoleLambdaExecution",
+            "DependsOn": "NotifyDashrestaurantIamRoleLambdaExecution",
             "Properties": {
               "BatchSize": 10,
               "EventSourceArn": {
@@ -930,6 +892,339 @@
               },
               "StartingPosition": "TRIM_HORIZON",
               "Enabled": "True"
+            }
+          },
+          "GetDashrestaurantsIamRoleLambdaExecution": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+              "AssumeRolePolicyDocument": {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Principal": {
+                      "Service": [
+                        "lambda.amazonaws.com"
+                      ]
+                    },
+                    "Action": [
+                      "sts:AssumeRole"
+                    ]
+                  }
+                ]
+              },
+              "Policies": [
+                {
+                  "PolicyName": {
+                    "Fn::Join": [
+                      "-",
+                      [
+                        "dev",
+                        "workshop-selman",
+                        "lambda"
+                      ]
+                    ]
+                  },
+                  "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                      {
+                        "Effect": "Allow",
+                        "Action": [
+                          "logs:CreateLogStream",
+                          "logs:PutLogEvents"
+                        ],
+                        "Resource": [
+                          {
+                            "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/workshop-selman-dev-get-restaurants:*:*"
+                          }
+                        ]
+                      },
+                      {
+                        "Effect": "Allow",
+                        "Action": "dynamodb:scan",
+                        "Resource": {
+                          "Fn::GetAtt": [
+                            "restaurantsTable",
+                            "Arn"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "Path": "/",
+              "RoleName": {
+                "Fn::Join": [
+                  "-",
+                  [
+                    "workshop-selman",
+                    "dev",
+                    "get-restaurants",
+                    {
+                      "Fn::Sub": "${AWS::Region}"
+                    },
+                    "lambdaRole"
+                  ]
+                ]
+              },
+              "ManagedPolicyArns": []
+            }
+          },
+          "SearchDashrestaurantsIamRoleLambdaExecution": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+              "AssumeRolePolicyDocument": {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Principal": {
+                      "Service": [
+                        "lambda.amazonaws.com"
+                      ]
+                    },
+                    "Action": [
+                      "sts:AssumeRole"
+                    ]
+                  }
+                ]
+              },
+              "Policies": [
+                {
+                  "PolicyName": {
+                    "Fn::Join": [
+                      "-",
+                      [
+                        "dev",
+                        "workshop-selman",
+                        "lambda"
+                      ]
+                    ]
+                  },
+                  "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                      {
+                        "Effect": "Allow",
+                        "Action": [
+                          "logs:CreateLogStream",
+                          "logs:PutLogEvents"
+                        ],
+                        "Resource": [
+                          {
+                            "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/workshop-selman-dev-search-restaurants:*:*"
+                          }
+                        ]
+                      },
+                      {
+                        "Effect": "Allow",
+                        "Action": "dynamodb:scan",
+                        "Resource": {
+                          "Fn::GetAtt": [
+                            "restaurantsTable",
+                            "Arn"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "Path": "/",
+              "RoleName": {
+                "Fn::Join": [
+                  "-",
+                  [
+                    "workshop-selman",
+                    "dev",
+                    "search-restaurants",
+                    {
+                      "Fn::Sub": "${AWS::Region}"
+                    },
+                    "lambdaRole"
+                  ]
+                ]
+              },
+              "ManagedPolicyArns": []
+            }
+          },
+          "PlaceDashorderIamRoleLambdaExecution": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+              "AssumeRolePolicyDocument": {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Principal": {
+                      "Service": [
+                        "lambda.amazonaws.com"
+                      ]
+                    },
+                    "Action": [
+                      "sts:AssumeRole"
+                    ]
+                  }
+                ]
+              },
+              "Policies": [
+                {
+                  "PolicyName": {
+                    "Fn::Join": [
+                      "-",
+                      [
+                        "dev",
+                        "workshop-selman",
+                        "lambda"
+                      ]
+                    ]
+                  },
+                  "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                      {
+                        "Effect": "Allow",
+                        "Action": [
+                          "logs:CreateLogStream",
+                          "logs:PutLogEvents"
+                        ],
+                        "Resource": [
+                          {
+                            "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/workshop-selman-dev-place-order:*:*"
+                          }
+                        ]
+                      },
+                      {
+                        "Effect": "Allow",
+                        "Action": "kinesis:PutRecord",
+                        "Resource": {
+                          "Fn::GetAtt": [
+                            "orderEventsStream",
+                            "Arn"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "Path": "/",
+              "RoleName": {
+                "Fn::Join": [
+                  "-",
+                  [
+                    "workshop-selman",
+                    "dev",
+                    "place-order",
+                    {
+                      "Fn::Sub": "${AWS::Region}"
+                    },
+                    "lambdaRole"
+                  ]
+                ]
+              },
+              "ManagedPolicyArns": []
+            }
+          },
+          "NotifyDashrestaurantIamRoleLambdaExecution": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+              "AssumeRolePolicyDocument": {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Principal": {
+                      "Service": [
+                        "lambda.amazonaws.com"
+                      ]
+                    },
+                    "Action": [
+                      "sts:AssumeRole"
+                    ]
+                  }
+                ]
+              },
+              "Policies": [
+                {
+                  "PolicyName": {
+                    "Fn::Join": [
+                      "-",
+                      [
+                        "dev",
+                        "workshop-selman",
+                        "lambda"
+                      ]
+                    ]
+                  },
+                  "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                      {
+                        "Effect": "Allow",
+                        "Action": [
+                          "logs:CreateLogStream",
+                          "logs:PutLogEvents"
+                        ],
+                        "Resource": [
+                          {
+                            "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/workshop-selman-dev-notify-restaurant:*:*"
+                          }
+                        ]
+                      },
+                      {
+                        "Effect": "Allow",
+                        "Action": [
+                          "kinesis:GetRecords",
+                          "kinesis:GetShardIterator",
+                          "kinesis:DescribeStream",
+                          "kinesis:ListStreams"
+                        ],
+                        "Resource": [
+                          {
+                            "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"IamRoleLambdaExecution\"][\"Properties\"][\"Policies\"][0][\"PolicyDocument\"][\"Statement\"][2][\"Resource\"][0]"
+                          }
+                        ]
+                      },
+                      {
+                        "Effect": "Allow",
+                        "Action": "kinesis:PutRecord",
+                        "Resource": {
+                          "Fn::GetAtt": [
+                            "orderEventsStream",
+                            "Arn"
+                          ]
+                        }
+                      },
+                      {
+                        "Effect": "Allow",
+                        "Action": "sns:Publish",
+                        "Resource": {
+                          "Ref": "restaurantNotificationTopic"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "Path": "/",
+              "RoleName": {
+                "Fn::Join": [
+                  "-",
+                  [
+                    "workshop-selman",
+                    "dev",
+                    "notify-restaurant",
+                    {
+                      "Fn::Sub": "${AWS::Region}"
+                    },
+                    "lambdaRole"
+                  ]
+                ]
+              },
+              "ManagedPolicyArns": []
             }
           },
           "restaurantsTable": {
@@ -988,31 +1283,31 @@
           "GetDashindexLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetDashindexLambdaVersionhKAslBbmlM5zTiZYmwLg0ElbUfggGQtx9wkpTsOZxE"
+              "Ref": "GetDashindexLambdaVersionwkI9ybkNRRLgfLLOVoxftajurWFR2EfI8MY9TP2o"
             }
           },
           "GetDashrestaurantsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetDashrestaurantsLambdaVersiontsp0TaqTiX2EYKmtZk6EmOLYwRcJckMNsK2VPG5J0Y"
+              "Ref": "GetDashrestaurantsLambdaVersionzVbaWLrNnoh3saQIrinwrDtukoAZ5dbRsAAjVQhYs"
             }
           },
           "SearchDashrestaurantsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "SearchDashrestaurantsLambdaVersionfzNGJtvFOUq2hP54n4c3Dqprof0wUhGB3FLuFw4n07M"
+              "Ref": "SearchDashrestaurantsLambdaVersionEfkKpgr9GzRluLjCpcAHnug051XiDITzl14M04ARpqo"
             }
           },
           "PlaceDashorderLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "PlaceDashorderLambdaVersionrBetKrZE8vb7OstFMnN8whIrkkySsSR2C2DNvixmi0"
+              "Ref": "PlaceDashorderLambdaVersionuyH9aEoGC1fb5aQI8RHRvwqLdDTtoxS76yy3Yyd6EhM"
             }
           },
           "NotifyDashrestaurantLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "NotifyDashrestaurantLambdaVersionJslwRxR0VrBbxeJeWFZqdEeJKjwyCv2M7HPcMoLv0"
+              "Ref": "NotifyDashrestaurantLambdaVersionbKMqHNJI1b1IHTsnFRa8k9dgC2Lr7kXfFnDflF5juU"
             }
           },
           "ServiceEndpoint": {
@@ -1057,7 +1352,8 @@
       "vpc": {}
     },
     "plugins": [
-      "serverless-pseudo-parameters"
+      "serverless-pseudo-parameters",
+      "serverless-iam-roles-per-function"
     ],
     "pluginsData": {},
     "functions": {
@@ -1121,6 +1417,11 @@
             "Ref": "restaurantsTable"
           }
         },
+        "iamRoleStatements": [
+          {
+            "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetDashrestaurantsIamRoleLambdaExecution\"][\"Properties\"][\"Policies\"][0][\"PolicyDocument\"][\"Statement\"][1]"
+          }
+        ],
         "name": "workshop-selman-dev-get-restaurants",
         "package": {},
         "memory": 1024,
@@ -1144,6 +1445,11 @@
             "Ref": "restaurantsTable"
           }
         },
+        "iamRoleStatements": [
+          {
+            "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"SearchDashrestaurantsIamRoleLambdaExecution\"][\"Properties\"][\"Policies\"][0][\"PolicyDocument\"][\"Statement\"][1]"
+          }
+        ],
         "name": "workshop-selman-dev-search-restaurants",
         "package": {},
         "memory": 1024,
@@ -1167,6 +1473,11 @@
             "Ref": "orderEventsStream"
           }
         },
+        "iamRoleStatements": [
+          {
+            "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"PlaceDashorderIamRoleLambdaExecution\"][\"Properties\"][\"Policies\"][0][\"PolicyDocument\"][\"Statement\"][1]"
+          }
+        ],
         "name": "workshop-selman-dev-place-order",
         "package": {},
         "memory": 1024,
@@ -1181,7 +1492,7 @@
             "stream": {
               "type": "kinesis",
               "arn": {
-                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"IamRoleLambdaExecution\"][\"Properties\"][\"Policies\"][0][\"PolicyDocument\"][\"Statement\"][5][\"Resource\"][0]"
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"IamRoleLambdaExecution\"][\"Properties\"][\"Policies\"][0][\"PolicyDocument\"][\"Statement\"][2][\"Resource\"][0]"
               }
             }
           }
@@ -1194,6 +1505,14 @@
             "Ref": "restaurantNotificationTopic"
           }
         },
+        "iamRoleStatements": [
+          {
+            "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"NotifyDashrestaurantIamRoleLambdaExecution\"][\"Properties\"][\"Policies\"][0][\"PolicyDocument\"][\"Statement\"][2]"
+          },
+          {
+            "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"NotifyDashrestaurantIamRoleLambdaExecution\"][\"Properties\"][\"Policies\"][0][\"PolicyDocument\"][\"Statement\"][3]"
+          }
+        ],
         "name": "workshop-selman-dev-notify-restaurant",
         "package": {},
         "memory": 1024,
@@ -1256,7 +1575,7 @@
     "artifact": "/Users/selmanercan/dev/git/devternity/production-ready-serverless-workshop-devternity-demo/.serverless/workshop-selman.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/workshop-selman/dev/1543668274760-2018-12-01T12:44:34.760Z",
+    "artifactDirectoryName": "serverless/workshop-selman/dev/1543669396970-2018-12-01T13:03:16.970Z",
     "artifact": "workshop-selman.zip"
   }
 }
