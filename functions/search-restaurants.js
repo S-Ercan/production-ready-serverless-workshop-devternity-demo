@@ -1,3 +1,4 @@
+const wrap = require('../lib/wrapper')
 const AWS = require('aws-sdk')
 const _ = require('lodash')
 
@@ -18,7 +19,7 @@ const findRestaurantsByTheme = async (theme, count) => {
   return resp.Items
 }
 
-module.exports.handler = async (event, context) => {
+module.exports.handler = wrap(async (event, context) => {
   const req = JSON.parse(event.body)
 
   const theme = req.theme
@@ -31,4 +32,4 @@ module.exports.handler = async (event, context) => {
   }
 
   return response
-}
+})

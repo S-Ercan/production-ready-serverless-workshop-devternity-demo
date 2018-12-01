@@ -1,8 +1,10 @@
 const APP_ROOT = '../../'
 const _ = require('lodash')
+const util = require('util')
 
 const viaHandler = async (event, functionName) => {
-    const handler = require(`${APP_ROOT}/functions/${functionName}`).handler
+    const handler = util.promisify(require(`${APP_ROOT}/functions/${functionName}`).handler)
+    console.log(`invoking via handler function ${functionName}`)
 
     const context = {}
     const response = await handler(event, context)
