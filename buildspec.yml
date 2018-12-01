@@ -2,14 +2,8 @@ version: 0.2
 
 phases:
   build:
-    Dev:
-      IntegrationTest:
-        commands:
-        - npm install
-        - npm run test
-      Deploy:
-        commands:
-        - npm run sls -- deploy -s $STAGE -r $REGION
-      AcceptanceTest:
-        commands:
-        - npm run acceptance
+    commands:
+      - npm install
+      - npm run test
+      - npm run sls -- deploy -s $STAGE -r $REGION
+      - npm run acceptance
