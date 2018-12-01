@@ -1,8 +1,8 @@
 const _ = require('lodash')
 const { promisify } = require('util')
-const awscred = require('awscred')
 const { REGION, STAGE } = process.env
 const AWS = require('aws-sdk')
+const Log = require('../../lib/log')
 AWS.config.region = REGION
 const SSM = new AWS.SSM()
 
@@ -32,7 +32,7 @@ const init = async () => {
         'url'
     ])
 
-    console.log('SSM params loaded')
+    Log.debug('SSM params loaded')
 
     process.env.TEST_ROOT = params.url
     process.env.orders_api = `${params.url}/orders`

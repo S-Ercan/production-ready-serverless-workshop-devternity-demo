@@ -7,7 +7,6 @@ const defaultResults = process.env.defaultResults || 8
 const tableName = process.env.restaurants_table
 
 const findRestaurantsByTheme = async (theme, count) => {
-  console.log(count);
   const req = {
     TableName: tableName,
     Limit: count,
