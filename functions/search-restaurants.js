@@ -1,10 +1,13 @@
 const AWS = require('aws-sdk')
+const _ = require('lodash')
+
 const dynamodb = new AWS.DynamoDB.DocumentClient()
 
 const defaultResults = process.env.defaultResults || 8
 const tableName = process.env.restaurants_table
 
 const findRestaurantsByTheme = async (theme, count) => {
+  console.log(count);
   const req = {
     TableName: tableName,
     Limit: count,
@@ -18,8 +21,11 @@ const findRestaurantsByTheme = async (theme, count) => {
 
 module.exports.handler = async (event, context) => {
   const req = JSON.parse(event.body)
+
   const theme = req.theme
-  const restaurants = await findRestaurantsByTheme(theme, defaultResults)
+  const count = _.get(req, 'count') || defaultResults;
+
+  const restaurants = await findRestaurantsByTheme(theme, count)
   const response = {
     statusCode: 200,
     body: JSON.stringify(restaurants)
